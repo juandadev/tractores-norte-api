@@ -1,9 +1,16 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const UsersService = require('../services/users');
 
 function usersAPI(app) {
   const router = express.Router();
 
+  app.use(bodyParser.json());
+  app.use(
+    bodyParser.urlencoded({
+      extended: true,
+    })
+  );
   app.use('/api/users', router);
 
   const usersService = new UsersService();
@@ -25,7 +32,7 @@ function usersAPI(app) {
     const { id } = req.params;
 
     try {
-      const user = await usersService.getUser({ id });
+      const user = await usersService.getUser(id);
 
       res.status(200).json({
         data: user,
@@ -37,14 +44,15 @@ function usersAPI(app) {
   });
 
   router.post('/', async (req, res, next) => {
-    const { body: user } = req;
+    const { body } = req;
+    console.log(body);
 
     try {
-      const createdUser = await usersService.createUser({ user });
+      const createdUser = await usersService.createUser(body);
 
       res.status(201).json({
         data: createdUser,
-        message: 'Users created',
+        message: 'User created',
       });
     } catch (err) {
       next(err);
@@ -53,10 +61,10 @@ function usersAPI(app) {
 
   router.put('/:id', async (req, res, next) => {
     const { id } = req.params;
-    const { body: user } = req;
+    const { body } = req;
 
     try {
-      const updatedUser = await usersService.updateUser({ id, user });
+      const updatedUser = await usersService.updateUser(id, body);
 
       res.status(200).json({
         data: updatedUser,
@@ -71,7 +79,7 @@ function usersAPI(app) {
     const { id } = req.params;
 
     try {
-      const deletedUser = await usersService.deleteUser({ id });
+      const deletedUser = await usersService.deleteUser(id);
 
       res.status(200).json({
         data: deletedUser,
