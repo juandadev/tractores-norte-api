@@ -1,14 +1,16 @@
 const express = require('express');
-const usersMock = require('../utils/usersDB.json');
+const UsersService = require('../services/users');
 
 function usersAPI(app) {
   const router = express.Router();
 
   app.use('/api/users', router);
 
+  const usersService = new UsersService();
+
   router.get('/', async (req, res, next) => {
     try {
-      const users = await Promise.resolve(usersMock);
+      const users = await usersService.getUsers();
 
       res.status(200).json({
         data: users,
@@ -20,8 +22,10 @@ function usersAPI(app) {
   });
 
   router.get('/:id', async (req, res, next) => {
+    const { id } = req.params;
+
     try {
-      const user = await Promise.resolve(usersMock[0]);
+      const user = await usersService.getUser({ id });
 
       res.status(200).json({
         data: user,
@@ -33,8 +37,10 @@ function usersAPI(app) {
   });
 
   router.post('/', async (req, res, next) => {
+    const { body: user } = req;
+
     try {
-      const createdUser = await Promise.resolve(usersMock[0].id);
+      const createdUser = await usersService.createUser({ user });
 
       res.status(201).json({
         data: createdUser,
@@ -46,8 +52,11 @@ function usersAPI(app) {
   });
 
   router.put('/:id', async (req, res, next) => {
+    const { id } = req.params;
+    const { body: user } = req;
+
     try {
-      const updatedUser = await Promise.resolve(usersMock[0]);
+      const updatedUser = await usersService.updateUser({ id, user });
 
       res.status(200).json({
         data: updatedUser,
@@ -59,8 +68,10 @@ function usersAPI(app) {
   });
 
   router.delete('/:id', async (req, res, next) => {
+    const { id } = req.params;
+
     try {
-      const deletedUser = await Promise.resolve(usersMock[0]);
+      const deletedUser = await usersService.deleteUser({ id });
 
       res.status(200).json({
         data: deletedUser,
