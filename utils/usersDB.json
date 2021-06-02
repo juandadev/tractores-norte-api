@@ -1,0 +1,13 @@
+[
+  {
+    "id_user": 1,
+    "name_user": "Juan Daniel",
+    "address_user": "Calle 15 de Mayo #26 Col. Centro",
+    "phone_user": 6271225229,
+    "email_user": "jdmartinez@itparral.edu.mx",
+    "password_user": "15410596",
+    "level_user": "admin",
+    "auth_token": "",
+    "refresh_token": ""
+  }
+]
