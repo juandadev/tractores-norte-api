@@ -1,7 +1,7 @@
 {
   "name": "tractores-norte-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "API for Tractores del Norte system",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,6 +11,7 @@
   "author": "Juan Daniel Martínez",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",

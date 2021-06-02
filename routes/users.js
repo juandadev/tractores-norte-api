@@ -45,7 +45,6 @@ function usersAPI(app) {
 
   router.post('/', async (req, res, next) => {
     const { body } = req;
-    console.log(body);
 
     try {
       const createdUser = await usersService.createUser(body);

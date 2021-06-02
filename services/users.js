@@ -1,5 +1,5 @@
-const usersMock = require('../utils/usersDB.json');
 const db = require('./db');
+const bcrypt = require('bcrypt');
 
 class UsersService {
   async getUsers() {
@@ -17,6 +17,9 @@ class UsersService {
   }
 
   async createUser(data) {
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(data.password_user, salt);
+
     const createdUser = await Promise.resolve(
       db.query(
         'INSERT INTO users (name_user, address_user, phone_user, email_user, password_user, level_user) VALUES (?, ?, ?, ?, ?, ?)',
@@ -25,7 +28,7 @@ class UsersService {
           data.address_user,
           data.phone_user,
           data.email_user,
-          data.password_user,
+          hash,
           data.level_user,
         ]
       )
