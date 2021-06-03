@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const UsersService = require('../services/users');
+const StoresService = require('../services/stores');
 
-function usersAPI(app) {
+function storesAPI(app) {
   const router = express.Router();
 
   app.use(bodyParser.json());
@@ -11,17 +11,17 @@ function usersAPI(app) {
       extended: true,
     })
   );
-  app.use('/api/users', router);
+  app.use('/api/stores', router);
 
-  const usersService = new UsersService();
+  const storesService = new StoresService();
 
   router.get('/', async (req, res, next) => {
     try {
-      const users = await usersService.getUsers();
+      const stores = await storesService.getStores();
 
       res.status(200).json({
-        data: users,
-        message: 'Users listed',
+        data: stores,
+        message: 'stores listed',
       });
     } catch (err) {
       next(err);
@@ -32,11 +32,11 @@ function usersAPI(app) {
     const { id } = req.params;
 
     try {
-      const user = await usersService.getUser(id);
+      const store = await storesService.getStore(id);
 
       res.status(200).json({
-        data: user,
-        message: 'User retrieved',
+        data: store,
+        message: 'store retrieved',
       });
     } catch (err) {
       next(err);
@@ -47,11 +47,11 @@ function usersAPI(app) {
     const { body } = req;
 
     try {
-      const createdUser = await usersService.createUser(body);
+      const createdStore = await storesService.createStore(body);
 
       res.status(201).json({
-        data: createdUser,
-        message: 'User created',
+        data: createdStore,
+        message: 'store created',
       });
     } catch (err) {
       next(err);
@@ -63,11 +63,11 @@ function usersAPI(app) {
     const { body } = req;
 
     try {
-      const updatedUser = await usersService.updateUser(id, body);
+      const updatedStore = await storesService.updateStore(id, body);
 
       res.status(200).json({
-        data: updatedUser,
-        message: 'User updated',
+        data: updatedStore,
+        message: 'store updated',
       });
     } catch (err) {
       next(err);
@@ -78,11 +78,11 @@ function usersAPI(app) {
     const { id } = req.params;
 
     try {
-      const deletedUser = await usersService.deleteUser(id);
+      const deletedStore = await storesService.deleteStore(id);
 
       res.status(200).json({
-        data: deletedUser,
-        message: 'User deleted',
+        data: deletedStore,
+        message: 'store deleted',
       });
     } catch (err) {
       next(err);
@@ -90,4 +90,4 @@ function usersAPI(app) {
   });
 }
 
-module.exports = usersAPI;
+module.exports = storesAPI;

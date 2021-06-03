@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const UsersService = require('../services/users');
+const VendorsService = require('../services/vendors');
 
-function usersAPI(app) {
+function vendorsAPI(app) {
   const router = express.Router();
 
   app.use(bodyParser.json());
@@ -11,17 +11,17 @@ function usersAPI(app) {
       extended: true,
     })
   );
-  app.use('/api/users', router);
+  app.use('/api/vendors', router);
 
-  const usersService = new UsersService();
+  const vendorsService = new VendorsService();
 
   router.get('/', async (req, res, next) => {
     try {
-      const users = await usersService.getUsers();
+      const vendors = await vendorsService.getVendors();
 
       res.status(200).json({
-        data: users,
-        message: 'Users listed',
+        data: vendors,
+        message: 'Vendors listed',
       });
     } catch (err) {
       next(err);
@@ -32,11 +32,11 @@ function usersAPI(app) {
     const { id } = req.params;
 
     try {
-      const user = await usersService.getUser(id);
+      const vendor = await vendorsService.getVendor(id);
 
       res.status(200).json({
-        data: user,
-        message: 'User retrieved',
+        data: vendor,
+        message: 'Vendor retrieved',
       });
     } catch (err) {
       next(err);
@@ -47,11 +47,11 @@ function usersAPI(app) {
     const { body } = req;
 
     try {
-      const createdUser = await usersService.createUser(body);
+      const createdVendor = await vendorsService.createVendor(body);
 
       res.status(201).json({
-        data: createdUser,
-        message: 'User created',
+        data: createdVendor,
+        message: 'Vendor created',
       });
     } catch (err) {
       next(err);
@@ -63,11 +63,11 @@ function usersAPI(app) {
     const { body } = req;
 
     try {
-      const updatedUser = await usersService.updateUser(id, body);
+      const updatedVendor = await vendorsService.updateVendor(id, body);
 
       res.status(200).json({
-        data: updatedUser,
-        message: 'User updated',
+        data: updatedVendor,
+        message: 'Vendor updated',
       });
     } catch (err) {
       next(err);
@@ -78,11 +78,11 @@ function usersAPI(app) {
     const { id } = req.params;
 
     try {
-      const deletedUser = await usersService.deleteUser(id);
+      const deletedVendor = await vendorsService.deleteVendor(id);
 
       res.status(200).json({
-        data: deletedUser,
-        message: 'User deleted',
+        data: deletedVendor,
+        message: 'Vendor deleted',
       });
     } catch (err) {
       next(err);
@@ -90,4 +90,4 @@ function usersAPI(app) {
   });
 }
 
-module.exports = usersAPI;
+module.exports = vendorsAPI;
