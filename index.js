@@ -9,7 +9,7 @@ const clientsAPI = require('./routes/clients');
 const categoriesAPI = require('./routes/categories');
 const storesAPI = require('./routes/stores');
 
-app.use(cors);
+app.use(cors());
 
 usersAPI(app);
 productsAPI(app);
