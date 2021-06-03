@@ -24,12 +24,12 @@ class UsersService {
       db.query(
         'INSERT INTO users (name_user, address_user, phone_user, email_user, password_user, level_user) VALUES (?, ?, ?, ?, ?, ?)',
         [
-          data.name_user,
-          data.address_user,
-          data.phone_user,
-          data.email_user,
+          data.name,
+          data.address || null,
+          data.phone || null,
+          data.email,
           hash,
-          data.level_user,
+          data.level,
         ]
       )
     );
@@ -42,12 +42,12 @@ class UsersService {
       db.query(
         'UPDATE users SET name_user=? , address_user=? , phone_user=? , email_user=? , password_user=? , level_user=? WHERE id_user=?',
         [
-          data.name_user,
-          data.address_user,
-          data.phone_user,
-          data.email_user,
-          data.password_user,
-          data.level_user,
+          data.name,
+          data.address || null,
+          data.phone || null,
+          data.email,
+          data.password,
+          data.level,
           id,
         ]
       )
