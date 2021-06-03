@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const { config } = require('./config/');
 const usersAPI = require('./routes/users');
@@ -7,6 +8,8 @@ const vendorsAPI = require('./routes/vendors');
 const clientsAPI = require('./routes/clients');
 const categoriesAPI = require('./routes/categories');
 const storesAPI = require('./routes/stores');
+
+app.use(cors);
 
 usersAPI(app);
 productsAPI(app);
