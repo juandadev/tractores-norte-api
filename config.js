@@ -2,6 +2,7 @@ const env = process.env;
 
 const config = {
   db: {
+    socketPath: env.DB_SOCKETPATH,
     host: env.DB_HOST,
     user: env.DB_USER,
     password: env.DB_PASSWORD,
