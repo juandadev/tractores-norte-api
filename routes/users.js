@@ -43,6 +43,37 @@ function usersAPI(app) {
     }
   });
 
+  router.post('/verify/:id', async (req, res, next) => {
+    const { id } = req.params;
+    const { body } = req;
+
+    try {
+      const user = await usersService.authorizeUser(id, body);
+
+      res.status(200).json({
+        data: user,
+        message: 'User retrieved',
+      });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.get('/decode/:token', async (req, res, next) => {
+    const { token } = req.params;
+
+    try {
+      const decode = await usersService.decodeJWT(token);
+
+      res.status(200).json({
+        data: decode,
+        message: 'JWT decoded',
+      });
+    } catch (err) {
+      next(err);
+    }
+  });
+
   router.post('/', async (req, res, next) => {
     const { body } = req;
 
