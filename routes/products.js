@@ -28,11 +28,39 @@ function productsAPI(app) {
     }
   });
 
+  router.get('/join', async (req, res, next) => {
+    try {
+      const product = await productsService.getDetailedProducts();
+
+      res.status(200).json({
+        data: product,
+        message: 'Product retrieved',
+      });
+    } catch (err) {
+      next(err);
+    }
+  });
+
   router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
 
     try {
       const product = await productsService.getProduct(id);
+
+      res.status(200).json({
+        data: product,
+        message: 'Product retrieved',
+      });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.get('/join/:id', async (req, res, next) => {
+    const { id } = req.params;
+
+    try {
+      const product = await productsService.getDetailedProduct(id);
 
       res.status(200).json({
         data: product,

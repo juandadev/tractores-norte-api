@@ -9,9 +9,30 @@ class ProductsService {
     return products || [];
   }
 
+  async getDetailedProducts() {
+    const product = await Promise.resolve(
+      db.query(
+        'SELECT products.id_product, products.key_product, products.name_product, categories.name_category AS category_product, stores.name_store AS store_product, products.stock_product, vendors.name_vendor AS vendor_product, products.state_product FROM products INNER JOIN categories ON products.fk_category_id=categories.id_category INNER JOIN stores ON products.fk_store_id=stores.id_store INNER JOIN vendors ON products.fk_vendor_id=vendors.id_vendor'
+      )
+    );
+
+    return product;
+  }
+
   async getProduct(id) {
     const product = await Promise.resolve(
       db.query('SELECT * FROM products WHERE id_product=?', [id])
+    );
+
+    return product;
+  }
+
+  async getDetailedProduct(id) {
+    const product = await Promise.resolve(
+      db.query(
+        'SELECT products.id_product, products.key_product, products.name_product, categories.name_category AS category_product, stores.name_store AS store_product, products.stock_product, vendors.name_vendor AS vendor_product, products.state_product FROM products INNER JOIN categories ON products.fk_category_id=categories.id_category INNER JOIN stores ON products.fk_store_id=stores.id_store INNER JOIN vendors ON products.fk_vendor_id=vendors.id_vendor WHERE products.id_product=?',
+        [id]
+      )
     );
 
     return product;

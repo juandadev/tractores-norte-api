@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2021 a las 22:54:20
+-- Tiempo de generación: 08-06-2021 a las 22:05:56
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -139,8 +139,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `name_user`, `address_user`, `phone_user`, `email_user`, `password_user`, `level_user`, `auth_token`, `refresh_token`) VALUES
-(1, 'Juan Daniel Martínez', '15 de Mayo #26 Col. Centro', 6271225229, 'jdmartinez@itparral.edu.mx', '15410596', 'admin', NULL, NULL),
-(2, 'Anahis Lopez', 'CNOP', 6271234567, 'anahis@gmail.com', '123', 'user', NULL, NULL);
+(1, 'Juan Daniel Martínez', '15 de Mayo #26 Col. Centro', 6271225229, 'jdmartinez@itparral.edu.mx', '$2b$10$g4b9W/MhG4VKX4wCFvdX7OxmV1mgt6AjnRNbXCPXV1E4FlrirS/rO', 'admin', NULL, NULL),
+(2, 'Anahis Lopez', 'CNOP', 6271234567, 'anahis@gmail.com', '$2b$10$BHYwb2MrjS2iq4HZraADIOK.Sx4R71jhBObd3erPNIz/wJTmORpQ6', 'admin', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -222,7 +222,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT de la tabla `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
@@ -240,13 +240,13 @@ ALTER TABLE `stores`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `vendors`
 --
 ALTER TABLE `vendors`
-  MODIFY `id_vendor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_vendor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
